@@ -12,7 +12,7 @@ export default function Login({ onLoginSuccess }) {
     setError('');
 
     try {
-      // Connects cleanly to your Express /api/auth/login endpoint
+      
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25,13 +25,13 @@ export default function Login({ onLoginSuccess }) {
         throw new Error(data.error || 'Authentication failed.');
       }
 
-      // 1. Save the administrative JWT token securely to localStorage
+      
       localStorage.setItem('token', data.token);
       localStorage.setItem('role', data.user.role);
       
       alert(`Welcome back, ${data.user.username}! Role: ${data.user.role}`);
       
-      // 2. Alert the parent app state that login was successful
+      
       onLoginSuccess();
     } catch (err) {
       setError(err.message);
@@ -42,10 +42,10 @@ export default function Login({ onLoginSuccess }) {
 
   return (
     <section className="card form-card login-card" style={{ maxWidth: '400px', margin: '20px auto' }}>
-      <h2>🔐 Admin Dashboard Login</h2>
+      <h2>Admin Dashboard Login</h2>
       <p className="text-muted">Authenticate to unlock item additions and catalog deletions.</p>
       
-      {error && <div style={{ color: 'red', marginBottom: '15px' }}>⚠️ {error}</div>}
+      {error && <div style={{ color: 'red', marginBottom: '15px' }}> {error}</div>}
 
       <form onSubmit={handleLogin}>
         <div className="form-group">

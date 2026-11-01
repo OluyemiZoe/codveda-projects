@@ -2,9 +2,7 @@ import { getCollection } from '../config/database.js';
 import { ObjectId } from 'mongodb';
 
 class ProductModel {
-    /**
-     * Pull all products from your MongoDB Atlas cluster collection
-     */
+    
     static async getAll() {
         try {
             const productCollection = getCollection('products');
@@ -17,9 +15,7 @@ class ProductModel {
         }
     }
 
-    /**
-     * Look up a single product item by its cloud ObjectId reference
-     */
+    
     static async getById(id) {
         const productCollection = getCollection('products');
         try {
@@ -29,9 +25,7 @@ class ProductModel {
         }
     }
 
-    /**
-     * Create and insert a real document into MongoDB Atlas
-     */
+    
     static async create(productData) {
         const productCollection = getCollection('products');
         const newProduct = {
@@ -42,9 +36,7 @@ class ProductModel {
         return { _id: result.insertedId, ...newProduct };
     }
 
-    /**
-     * Modify a product document directly inside Atlas
-     */
+    
     static async update(id, updatedData) {
         const productCollection = getCollection('products');
         try {
@@ -59,9 +51,7 @@ class ProductModel {
         }
     }
 
-    /**
-     * Delete a product document from MongoDB Atlas using its unique string coordinate
-     */
+    
     static async delete(id) {
         const productCollection = getCollection('products');
         try {

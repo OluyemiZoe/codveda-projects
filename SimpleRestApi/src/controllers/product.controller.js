@@ -4,7 +4,7 @@ class ProductController {
     static async getAll(req, res) {
         try {
             const products = await ProductService.getAllProducts();
-            // Fallback guard to ensure data arrays down to client streams
+            
             const payload = Array.isArray(products) ? products : [];
             res.status(200).json(payload);
         } catch (error) {

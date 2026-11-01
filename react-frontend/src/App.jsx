@@ -89,11 +89,11 @@ export default function App() {
     <div className="container">
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1> React Product Catalog Admin</h1>
-          <p>Manage inventory reactively using structural components.</p>
+          <h1> Product Catalog </h1>
+          <p>Manage inventory.</p>
         </div>
         <button className="btn btn-danger" onClick={handleLogout} style={{ height: 'fit-content' }}>
-          Logout Door 🚪
+          Logout
         </button>
       </header>
 
@@ -122,7 +122,7 @@ export default function App() {
                 ))
               ) : (
                 <div style={{ color: 'red', marginTop: '10px' }}>
-                  ⚠️ Access Intercepted: {products?.error || 'Expected data collection array layer.'}
+                   Access Intercepted: {products?.error || 'Expected data collection array layer.'}
                 </div>
               )}
             </div>

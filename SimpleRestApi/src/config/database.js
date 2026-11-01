@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv'; // 1. Import the environment loader package
+import dotenv from 'dotenv'; 
 
-// 2. Configure dotenv to parse your secret .env file parameters into memory on boot
+
 dotenv.config();
 
-// 3. Strict environment variable extraction (fallback completely removed to guarantee security)
+
 const url = process.env.MONGODB_URI;
 
 if (!url) {

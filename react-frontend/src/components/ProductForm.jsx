@@ -17,15 +17,15 @@ export default function ProductForm({ onProductAdded }) {
     };
 
     try {
-      // 1. Grab your logged-in administrator JWT token from storage
+      
       const token = localStorage.getItem('token');
 
-      // 2. Attach the token to pass your backend's authenticateToken gate
+      
       const response = await fetch(API_BASE_URL, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Passes the admin role check
+          'Authorization': `Bearer ${token}` 
         },
         body: JSON.stringify(payload),
       });
@@ -37,12 +37,12 @@ export default function ProductForm({ onProductAdded }) {
         throw new Error('Could not add product.');
       }
 
-      // Clear input fields on successful database write
+      
       setName('');
       setPrice('');
       setStock('');
       
-      // Trigger inventory list reload natively on your dashboard
+      
       onProductAdded(); 
     } catch (error) {
       alert(error.message);
@@ -60,7 +60,7 @@ export default function ProductForm({ onProductAdded }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            placeholder="e.g. Wireless Mouse"
+            placeholder="e.g. Enter Product Name"
           />
         </div>
         <div className="form-group">

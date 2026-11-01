@@ -5,8 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // Intercepts any frontend fetch call starting with /api
-      // and safely routes it to your local Express engine
+      
       '/api': {
         target: 'http://localhost:3000',
         changeOrigin: true,
