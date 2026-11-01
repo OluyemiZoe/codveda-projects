@@ -1,9 +1,18 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv'; // 1. Import the environment loader package
 
-const url = process.env.MONGODB_URI || 'mongodb+srv://zoeinspired1609_db_user:ZoeAtlasPass123@cluster0.mnouqmn.mongodb.net/';
+// 2. Configure dotenv to parse your secret .env file parameters into memory on boot
+dotenv.config();
+
+// 3. Strict environment variable extraction (fallback completely removed to guarantee security)
+const url = process.env.MONGODB_URI;
+
+if (!url) {
+  console.error("❌ CRITICAL ERROR: MONGODB_URI is not defined inside your secret .env file!");
+  process.exit(1);
+}
 
 const client = new MongoClient(url);
-
 const dbName = 'SimpleRestApi';
 let dbConnection = null;
 
@@ -12,11 +21,11 @@ export async function connectDB() {
 
   try {
     await client.connect();
-    console.log(' Successfully connected to MongoDB Atlas Cloud Cluster!');
+    console.log('☁️  Successfully connected to MongoDB Atlas Cloud Cluster securely!');
     dbConnection = client.db(dbName);
     return dbConnection;
   } catch (error) {
-    console.error(' MongoDB Atlas connection failed:', error);
+    console.error('❌ MongoDB Atlas connection failed:', error);
     throw error;
   }
 }
