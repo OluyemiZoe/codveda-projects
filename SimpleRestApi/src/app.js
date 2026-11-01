@@ -1,23 +1,25 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import productRoutes from './routes/product.routes.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import authRoutes from './routes/auth.routes.js'; 
+import productRoutes from './routes/product.routes.js'; 
 
 const app = express();
 
-
-app.use(cors({
-    origin: 'http://127.0.0.1:5501'
-}));
-
+app.use(cors()); 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../public')));
-
+// Mount rest endpoints cleanly
+app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+
+// Establish pathing resolution variables safely
+const frontendBuildPath = path.resolve('../react-frontend/dist');
+app.use(express.static(frontendBuildPath));
+
+// Named wildcard fallback handler matching Express requirements
+app.get('/*any', (req, res) => {
+    res.sendFile(path.join(frontendBuildPath, 'index.html'));
+});
 
 export default app;
